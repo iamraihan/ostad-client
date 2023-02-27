@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./Folders.css";
+import { AiOutlineFolder } from "react-icons/ai";
 const Folders = ({ folder }) => {
   const [customError, setCustomError] = useState("");
   console.log(customError);
@@ -54,7 +55,11 @@ const Folders = ({ folder }) => {
     <div>
       <div className="folder-item-wraper">
         <div className="folder-item">
-          <p className="folder">{folder.folder}</p>
+          <p className="folder">
+            {" "}
+            <AiOutlineFolder size={20}></AiOutlineFolder>
+            {folder.folder}
+          </p>
           {folder.folder !== "root" && (
             <button onClick={() => setShowConfirmation(true)}>X</button>
           )}
