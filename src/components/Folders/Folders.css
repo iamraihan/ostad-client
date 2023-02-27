@@ -1,0 +1,33 @@
+.folder-item-wraper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.folder-item {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.folder {
+  padding: 10px 30px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.remove-button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background-color: #fff;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+.folder-add-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
