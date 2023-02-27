@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./Folders.css";
 const Folders = ({ folder }) => {
+  console.log(folder.folder);
   // state for delete folder
   const [showConfirmation, setShowConfirmation] = useState(false);
   // state for addding a folder
@@ -47,7 +48,9 @@ const Folders = ({ folder }) => {
       <div className="folder-item-wraper">
         <div className="folder-item">
           <p className="folder">{folder.folder}</p>
-          <button onClick={() => setShowConfirmation(true)}>X</button>
+          {folder.folder !== "root" && (
+            <button onClick={() => setShowConfirmation(true)}>X</button>
+          )}
           {showConfirmation && (
             <div className="confirmation">
               <p>Are you sure you want to delete Folder?</p>
