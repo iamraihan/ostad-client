@@ -13,7 +13,7 @@ const Folders = ({ folder }) => {
     const folder = e.target.name.value;
     const data = { folder };
     axios
-      .post("http://localhost:5000/folders", data)
+      .post("https://ostad-server.onrender.com/folders", data)
       .then((res) => {
         console.log(res);
         e.target.reset();
@@ -32,7 +32,7 @@ const Folders = ({ folder }) => {
   const removeFolder = (id) => {
     // console.log(id);
     axios
-      .delete(`http://localhost:5000/folders/${id}`)
+      .delete(`https://ostad-server.onrender.com/folders/${id}`)
       .then((res) => {
         console.log(res.data);
         setShowConfirmation(false);
