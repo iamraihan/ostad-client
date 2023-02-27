@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./Folders.css";
 const Folders = ({ folder }) => {
+  const [customError, setCustomError] = useState("");
+  console.log(customError);
   // state for delete folder
   const [showConfirmation, setShowConfirmation] = useState(false);
   // state for addding a folder
@@ -11,10 +13,16 @@ const Folders = ({ folder }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const folder = e.target.name.value;
+    if (folder === "") {
+      setCustomError("Please add a folder!!");
+      return;
+    }
     const data = { folder };
+
     axios
       .post("https://ostad-server.onrender.com/folders", data)
       .then((res) => {
+        setCustomError("");
         console.log(res);
         e.target.reset();
       })
@@ -36,12 +44,12 @@ const Folders = ({ folder }) => {
       .then((res) => {
         console.log(res.data);
         setShowConfirmation(false);
+        setCustomError("");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
     <div>
       <div className="folder-item-wraper">
@@ -54,14 +62,14 @@ const Folders = ({ folder }) => {
             <div className="confirmation">
               <p>Are you sure you want to delete Folder?</p>
               <button
-                className="submit-button"
+                className="cancel-button"
                 onClick={() => removeFolder(folder._id)}
               >
                 Delete
               </button>
               <button
                 style={{ marginLeft: "10px" }}
-                className="cancel-button"
+                className="submit-button"
                 onClick={() => setShowConfirmation(false)}
               >
                 Cancel
@@ -73,6 +81,7 @@ const Folders = ({ folder }) => {
           <button className="folder-add-item " onClick={handleClick}>
             + New
           </button>
+
           {popUpOpen && (
             <div className="pop-up-window">
               <form className="folder-form" onSubmit={handleSubmit}>
@@ -94,6 +103,7 @@ const Folders = ({ folder }) => {
               </button>
             </div>
           )}
+          <p className="error">{customError}</p>
         </div>
       </div>
     </div>
