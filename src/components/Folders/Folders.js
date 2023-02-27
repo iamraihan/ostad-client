@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./Folders.css";
 const Folders = ({ folder }) => {
-  console.log(folder.folder);
   // state for delete folder
   const [showConfirmation, setShowConfirmation] = useState(false);
   // state for addding a folder
