@@ -1,11 +1,32 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import "./Folders.css";
 const Folders = ({ folder }) => {
   //   console.log(folder._id);
-  const addFolder = () => {
-    console.log("click");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const folder = e.target.name.value;
+
+    const data = { folder };
+    axios
+      .post("http://localhost:5000/folders", data)
+      .then((res) => {
+        console.log(res);
+        e.target.reset();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  const [popUpOpen, setPopUpOpen] = useState(false);
+
+  const handleClick = () => {
+    setPopUpOpen(true);
+  };
+
+  // delete folder
   const removeFolder = (id) => {
     // console.log(id);
     axios
@@ -27,10 +48,36 @@ const Folders = ({ folder }) => {
             X
           </p>
         </div>
-        <div className="folder-add-item" onClick={() => addFolder()}>
+        <div>
+          <button className="folder-add-item " onClick={handleClick}>
+            + New
+          </button>
+          {popUpOpen && (
+            <div className="pop-up-window">
+              <form className="folder-form" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Folder Name"
+                  id=""
+                />
+                <button className="submit-button" type="submit">
+                  Create
+                </button>
+              </form>
+              <button
+                className="cancel-button"
+                onClick={() => setPopUpOpen(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
+        {/* <div className="folder-add-item" onClick={handleClick}>
           <p className="remove-button">+</p>
           <p> New</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
